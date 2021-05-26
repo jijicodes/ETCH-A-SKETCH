@@ -1,0 +1,42 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  font-family: sans-serif;
+  background-color: rgb(240, 212, 204);
+  font-family: "ZCOOL KuaiLe", cursive;
+}
+
+body p {
+  font-size: 30px;
+}
+body p1 {
+  font-size: 20px;
+  padding: 10px;
+  margin: 10px;
+}
+
+#gridNum,
+#rainbowBtn,
+#darkBtn {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 25px;
+}
+
+#squares {
+  /*
+    you still have to style this div to make the .boxes appear in a grid
+    this could be done via a few ways but it would be nice if you did it 
+    at least using flexbox/`flex-wrap`, but it would also be good to try to 
+    do it with css grids as well
+    */
+}
+
+.box {
+  height: 5px;
+  width: 5px;
+  margin: 2px;
+  background-color: violet;
+}
