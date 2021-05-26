@@ -1,3 +1,5 @@
+const GRID_WIDTH = 100;
+
 window.addEventListener("DOMContentLoaded", (event) => {
   /**
    *
@@ -28,15 +30,21 @@ window.addEventListener("DOMContentLoaded", (event) => {
     // empty the #squares div of children
     // call generate boxes with the result of a call to the prompt("how many squares") function
   });
+
+  // set squares width to be GRID_WIDTH
+  // document.getElementById('squares').something = GRID_WIDTH
 });
 
 /**
  * @param {string} className
+ * @param {{height: number, width: number}} dimentions
  * @returns {HTMLDivElement}
  */
-function createBox(className) {
+function createBox(className, dimentions) {
   // use document.createElement to create a relevant div
   const item = document.createElement("div");
+  //item.something = dimentions.width
+  //item.something = dimentions.height
   item.classList.add(className);
   return item;
 }

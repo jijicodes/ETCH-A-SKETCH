@@ -23,9 +23,49 @@ body p1 {
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 25px;
+  border-radius: 4px;
+  border: none;
+  font-size: 21px;
+  padding: 9px 18px;
+}
+
+#gridNum {
+  border-color: black;
+}
+
+#rainbowBtn {
+  color: black;
+  background-image: linear-gradient(
+    to right,
+    #e7484f,
+    #e7484f 16.65%,
+    #f68b1d 16.65%,
+    #f68b1d 33.3%,
+    #fced00 33.3%,
+    #fced00 49.95%,
+    #009e4f 49.95%,
+    #009e4f 66.6%,
+    #00aac3 66.6%,
+    #00aac3 83.25%,
+    #732982 83.25%,
+    #732982 100%,
+    #e7484f 100%
+  );
+  animation: slidebg 5s linear infinite;
+}
+#darkBtn {
+  background-color: rgb(81, 82, 82);
+  color: white;
+}
+
+button {
+  cursor: pointer;
 }
 
 #squares {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   /*
     you still have to style this div to make the .boxes appear in a grid
     this could be done via a few ways but it would be nice if you did it 
@@ -35,8 +75,17 @@ body p1 {
 }
 
 .box {
-  height: 5px;
-  width: 5px;
   margin: 2px;
   background-color: violet;
+}
+
+#reset {
+  margin: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 25px;
+  border-radius: 4px;
+  border: none;
+  font-size: 21px;
+  padding: 9px 18px;
 }
