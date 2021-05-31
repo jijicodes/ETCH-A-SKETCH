@@ -1,4 +1,5 @@
-const GRID_WIDTH = 100;
+const GRID_WIDTH = 400;
+const GRID_MARGIN = 10;
 
 window.addEventListener("DOMContentLoaded", (event) => {
   /**
@@ -8,43 +9,63 @@ window.addEventListener("DOMContentLoaded", (event) => {
    */
   const generateBoxes = (count) => {
     const square = document.querySelector("#squares");
+
     // optionally empty the children of square first
 
     // then add count x count number of .box divs into square (hint: square.appendChild())
+    const boxSize = GRID_WIDTH / count - GRID_MARGIN * 2;
     for (let i = 1; i <= count * count; i++) {
-      square?.appendChild(createBox("box"));
+      square?.appendChild(
+        createBox("box", {
+          height: boxSize,
+          width: boxSize,
+          margin: GRID_MARGIN,
+        })
+      );
     }
   };
 
-  generateBoxes(5);
+  const gridSizeInput = document.getElementById("gridNum");
+  if (gridSizeInput) {
+    gridSizeInput.addEventListener("change", (e) => {
+      generateBoxes(e.target?.value);
+    });
+  }
 
-  document.querySelector("#squares")?.addEventListener("mouseover", (e) => {
-    // readme: https://javascript.info/bubbling-and-capturing
-    console.log("you ran me over!", e.target);
+  const gridContainer = document.getElementById("squares");
+  if (gridContainer) {
+    gridContainer.addEventListener("mouseover", (e) => {
+      // readme: https://javascript.info/bubbling-and-capturing
+      console.log("you ran me over!", e.target);
 
-    // determine IF the target is a .box element
-    // IF so, then set that element's background color
-  });
+      // determine IF the target is a .box element
+      // IF so, then set that element's background color
+    });
+    gridContainer.style.width = `${GRID_WIDTH}px`;
+  }
 
-  document.getElementById("reset")?.addEventListener("click", () => {
+  document.getElementById("reset")?.addEventListener("click", (e) => {
+    event.stopPropagation();
+    document.getElementById("reset").innerHTML = "";
+
     // empty the #squares div of children
     // call generate boxes with the result of a call to the prompt("how many squares") function
   });
-
-  // set squares width to be GRID_WIDTH
-  // document.getElementById('squares').something = GRID_WIDTH
 });
 
 /**
  * @param {string} className
- * @param {{height: number, width: number}} dimentions
+ * @param {{height: number, width: number, margin: number | undefined }} dimentions
  * @returns {HTMLDivElement}
  */
-function createBox(className, dimentions) {
-  // use document.createElement to create a relevant div
+
+function createBox(className, { width, height, margin = 0 }) {
   const item = document.createElement("div");
-  //item.something = dimentions.width
-  //item.something = dimentions.height
+  item.style.width = `${width}px`;
+  item.style.height = `${height}px`;
+  item.style.margin = `${margin}px`;
+
   item.classList.add(className);
+
   return item;
 }
