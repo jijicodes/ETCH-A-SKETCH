@@ -8,8 +8,11 @@ window.addEventListener("DOMContentLoaded", (event) => {
    * @returns {void}
    */
   const generateBoxes = (count) => {
-    const square = document.querySelector("#squares");
+    const square = document.getElementById("squares");
 
+    if (square) {
+      square.innerHTML = "";
+    }
     // optionally empty the children of square first
 
     // then add count x count number of .box divs into square (hint: square.appendChild())
@@ -25,29 +28,36 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   };
 
-  const gridSizeInput = document.getElementById("gridNum");
-  if (gridSizeInput) {
-    gridSizeInput.addEventListener("change", (e) => {
-      generateBoxes(e.target?.value);
+  const gridSizeInputCount = document
+    .getElementById("gridNum")
+    ?.getAttribute("value");
+  if (gridSizeInputCount) {
+    generateBoxes(parseInt(gridSizeInputCount || "1"));
+    document.getElementById("gridNum")?.addEventListener("change", (e) => {
+      /**
+       * @type {HTMLInputElement | null}
+       */
+      const gridNumInput = document.getElementById("gridNum");
+      const newGridSize = parseInt(gridNumInput?.value || "1");
+      generateBoxes(newGridSize);
+      console.log(newGridSize);
     });
   }
 
   const gridContainer = document.getElementById("squares");
+  const divBox = document.querySelectorAll(".box");
   if (gridContainer) {
-    gridContainer.addEventListener("mouseover", (e) => {
+    gridContainer?.addEventListener("mouseover", (e) => {
       // readme: https://javascript.info/bubbling-and-capturing
-      console.log("you ran me over!", e.target);
-
-      // determine IF the target is a .box element
-      // IF so, then set that element's background color
+      if (e.target?.classList.contains("box")) {
+        e.target.style.backgroundColor = "red";
+      }
     });
     gridContainer.style.width = `${GRID_WIDTH}px`;
   }
 
   document.getElementById("reset")?.addEventListener("click", (e) => {
-    event.stopPropagation();
-    document.getElementById("reset").innerHTML = "";
-
+    generateBoxes(1);
     // empty the #squares div of children
     // call generate boxes with the result of a call to the prompt("how many squares") function
   });
@@ -68,4 +78,8 @@ function createBox(className, { width, height, margin = 0 }) {
   item.classList.add(className);
 
   return item;
+}
+
+function rainbowColor() {
+  return Math.floor(Math.random * 12);
 }
