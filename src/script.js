@@ -37,11 +37,39 @@ window.addEventListener("DOMContentLoaded", (event) => {
     gridContainer?.addEventListener("mouseover", (e) => {
       // readme: https://javascript.info/bubbling-and-capturing
       if (e.target?.classList.contains("box")) {
-        e.target.style.backgroundColor = rainbowColor();
+        e.target.style.backgroundColor = "pink";
       }
     });
     gridContainer.style.width = `${GRID_WIDTH}px`;
   }
+
+  document.getElementById("rainbowBtn")?.addEventListener("click", (e) => {
+    const gridContainer = document.getElementById("squares");
+    const divBox = document.querySelectorAll(".box");
+    if (gridContainer) {
+      gridContainer?.addEventListener("mouseover", (e) => {
+        // readme: https://javascript.info/bubbling-and-capturing
+        if (e.target?.classList.contains("box")) {
+          e.target.style.backgroundColor = rainbowColor();
+        }
+      });
+      gridContainer.style.width = `${GRID_WIDTH}px`;
+    }
+  });
+
+  document.getElementById("darkBtn")?.addEventListener("click", (e) => {
+    const gridContainer = document.getElementById("squares");
+    const divBox = document.querySelectorAll(".box");
+    if (gridContainer) {
+      gridContainer?.addEventListener("mouseover", (e) => {
+        // readme: https://javascript.info/bubbling-and-capturing
+        if (e.target?.classList.contains("box")) {
+          e.target.style.backgroundColor = "black";
+        }
+      });
+      gridContainer.style.width = `${GRID_WIDTH}px`;
+    }
+  });
 
   /**
    * @returns {string}
@@ -54,12 +82,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
     return `rgb(${red},${green},${blue})`;
   }
 
-  function rainbowGrid() {
-    const rainbowBtn = document.getElementById("#rainbowBtn");
-    const darkBtn = document.getElementById("#darkBtn");
-  }
-
-  rainbowBtn?.addEventListener("click", rainbowGrid);
   /**
    *
    * @param {number} defaultSize
