@@ -27,48 +27,36 @@ window.addEventListener("DOMContentLoaded", (event) => {
   };
 
   generateBoxes(getCurrentGridSize(6));
+  const gridContainer = document.getElementById("squares");
+  if (gridContainer) {
+    gridContainer.style.width = `${GRID_WIDTH}px`;
+    changePaint(() => "pink");
+  }
   document.getElementById("gridNum")?.addEventListener("change", (e) => {
     generateBoxes(getCurrentGridSize(6));
   });
 
-  const gridContainer = document.getElementById("squares");
-  const divBox = document.querySelectorAll(".box");
-  if (gridContainer) {
-    gridContainer?.addEventListener("mouseover", (e) => {
-      // readme: https://javascript.info/bubbling-and-capturing
-      if (e.target?.classList.contains("box")) {
-        e.target.style.backgroundColor = "pink";
-      }
-    });
-    gridContainer.style.width = `${GRID_WIDTH}px`;
+  /**
+   *
+   * @param {()=> string} setColor
+   */
+  function changePaint(setColor) {
+    const gridContainer = document.getElementById("squares");
+    if (gridContainer) {
+      gridContainer?.addEventListener("mouseover", (e) => {
+        if (e.target?.classList.contains("box")) {
+          e.target.style.backgroundColor = setColor();
+        }
+      });
+    }
   }
 
   document.getElementById("rainbowBtn")?.addEventListener("click", (e) => {
-    const gridContainer = document.getElementById("squares");
-    const divBox = document.querySelectorAll(".box");
-    if (gridContainer) {
-      gridContainer?.addEventListener("mouseover", (e) => {
-        // readme: https://javascript.info/bubbling-and-capturing
-        if (e.target?.classList.contains("box")) {
-          e.target.style.backgroundColor = rainbowColor();
-        }
-      });
-      gridContainer.style.width = `${GRID_WIDTH}px`;
-    }
+    changePaint(rainbowColor);
   });
 
   document.getElementById("darkBtn")?.addEventListener("click", (e) => {
-    const gridContainer = document.getElementById("squares");
-    const divBox = document.querySelectorAll(".box");
-    if (gridContainer) {
-      gridContainer?.addEventListener("mouseover", (e) => {
-        // readme: https://javascript.info/bubbling-and-capturing
-        if (e.target?.classList.contains("box")) {
-          e.target.style.backgroundColor = "black";
-        }
-      });
-      gridContainer.style.width = `${GRID_WIDTH}px`;
-    }
+    changePaint(() => "black");
   });
 
   /**
@@ -96,6 +84,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
 
   document.getElementById("reset")?.addEventListener("click", (e) => {
     generateBoxes(getCurrentGridSize(5));
+    changePaint(() => "pink");
 
     // empty the #squares div of children
     // call generate boxes with the result of a call to the prompt("how many squares") function
