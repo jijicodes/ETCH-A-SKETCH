@@ -1,6 +1,5 @@
 const GRID_WIDTH = 400;
-const GRID_MARGIN = 10;
-
+const GRID_MARGIN = 2;
 window.addEventListener("DOMContentLoaded", (event) => {
   /**
    *
@@ -14,7 +13,6 @@ window.addEventListener("DOMContentLoaded", (event) => {
       square.innerHTML = "";
     }
     // optionally empty the children of square first
-
     // then add count x count number of .box divs into square (hint: square.appendChild())
     const boxSize = GRID_WIDTH / count - GRID_MARGIN * 2;
     for (let i = 1; i <= count * count; i++) {
@@ -28,21 +26,10 @@ window.addEventListener("DOMContentLoaded", (event) => {
     }
   };
 
-  const gridSizeInputCount = document
-    .getElementById("gridNum")
-    ?.getAttribute("value");
-  if (gridSizeInputCount) {
-    generateBoxes(parseInt(gridSizeInputCount || "1"));
-    document.getElementById("gridNum")?.addEventListener("change", (e) => {
-      /**
-       * @type {HTMLInputElement | null}
-       */
-      const gridNumInput = document.getElementById("gridNum");
-      const newGridSize = parseInt(gridNumInput?.value || "1");
-      generateBoxes(newGridSize);
-      console.log(newGridSize);
-    });
-  }
+  generateBoxes(getCurrentGridSize(6));
+  document.getElementById("gridNum")?.addEventListener("change", (e) => {
+    generateBoxes(getCurrentGridSize(6));
+  });
 
   const gridContainer = document.getElementById("squares");
   const divBox = document.querySelectorAll(".box");
@@ -50,14 +37,44 @@ window.addEventListener("DOMContentLoaded", (event) => {
     gridContainer?.addEventListener("mouseover", (e) => {
       // readme: https://javascript.info/bubbling-and-capturing
       if (e.target?.classList.contains("box")) {
-        e.target.style.backgroundColor = "red";
+        e.target.style.backgroundColor = rainbowColor();
       }
     });
     gridContainer.style.width = `${GRID_WIDTH}px`;
   }
 
+  /**
+   * @returns {string}
+   */
+  function rainbowColor() {
+    const red = Math.floor(Math.random() * 256);
+    const green = Math.floor(Math.random() * 256);
+    const blue = Math.floor(Math.random() * 256);
+
+    return `rgb(${red},${green},${blue})`;
+  }
+
+  function rainbowGrid() {
+    const rainbowBtn = document.getElementById("#rainbowBtn");
+    const darkBtn = document.getElementById("#darkBtn");
+  }
+
+  rainbowBtn?.addEventListener("click", rainbowGrid);
+  /**
+   *
+   * @param {number} defaultSize
+   * @returns {number}
+   */
+  function getCurrentGridSize(defaultSize) {
+    const newGridSize = parseInt(
+      document.getElementById("gridNum")?.value || defaultSize
+    );
+    return newGridSize;
+  }
+
   document.getElementById("reset")?.addEventListener("click", (e) => {
-    generateBoxes(1);
+    generateBoxes(getCurrentGridSize(5));
+
     // empty the #squares div of children
     // call generate boxes with the result of a call to the prompt("how many squares") function
   });
@@ -78,8 +95,4 @@ function createBox(className, { width, height, margin = 0 }) {
   item.classList.add(className);
 
   return item;
-}
-
-function rainbowColor() {
-  return Math.floor(Math.random * 12);
 }
