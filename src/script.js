@@ -1,62 +1,29 @@
+/**
+ * @typedef {() => string} ColorGen
+ */
 const GRID_WIDTH = 700;
 const GRID_MARGIN = 2;
+
+/**
+ * @type {ColorGen}
+ */
+let boxColor = () => "pink";
+
 window.addEventListener("DOMContentLoaded", (event) => {
-  /**
-   *
-   * @param {number} count
-   * @returns {void}
-   */
-  const generateBoxes = (count) => {
-    const square = document.getElementById("squares");
-
-    if (square) {
-      square.innerHTML = "";
-    }
-    // optionally empty the children of square first
-    // then add count x count number of .box divs into square (hint: square.appendChild())
-    const boxSize = GRID_WIDTH / count - GRID_MARGIN * 2;
-    for (let i = 1; i <= count * count; i++) {
-      square?.appendChild(
-        createBox("box", {
-          height: boxSize,
-          width: boxSize,
-          margin: GRID_MARGIN,
-        })
-      );
-    }
-  };
-
-  generateBoxes(getCurrentGridSize(6));
-  const gridContainer = document.getElementById("squares");
-  if (gridContainer) {
-    gridContainer.style.width = `${GRID_WIDTH}px`;
-    changePaint(() => "pink");
-  }
-  document.getElementById("gridNum")?.addEventListener("change", (e) => {
-    generateBoxes(getCurrentGridSize(6));
-  });
-
-  /**
-   *
-   * @param {()=> string} setColor
-   */
-  function changePaint(setColor) {
-    const gridContainer = document.getElementById("squares");
-    if (gridContainer) {
-      gridContainer?.addEventListener("mouseover", (e) => {
-        if (e.target?.classList.contains("box")) {
-          e.target.style.backgroundColor = setColor();
-        }
-      });
-    }
-  }
+  initializeEtchSketch();
 
   document.getElementById("rainbowBtn")?.addEventListener("click", (e) => {
-    changePaint(rainbowColor);
+    boxColor = rainbowColor;
   });
 
   document.getElementById("darkBtn")?.addEventListener("click", (e) => {
-    changePaint(() => "black");
+    boxColor = (() => {
+      let alpha = 0.1;
+      return () => {
+        alpha += (1 - alpha) / 50;
+        return `rgba(0, 0, 0, ${alpha})`;
+      };
+    })();
   });
 
   /**
@@ -70,26 +37,77 @@ window.addEventListener("DOMContentLoaded", (event) => {
     return `rgb(${red},${green},${blue})`;
   }
 
-  /**
-   *
-   * @param {number} defaultSize
-   * @returns {number}
-   */
-  function getCurrentGridSize(defaultSize) {
-    const newGridSize = parseInt(
-      document.getElementById("gridNum")?.value || defaultSize
-    );
-    return newGridSize;
-  }
-
   document.getElementById("reset")?.addEventListener("click", (e) => {
     generateBoxes(getCurrentGridSize(5));
-    changePaint(() => "pink");
+    boxColor = () => "pink";
 
     // empty the #squares div of children
     // call generate boxes with the result of a call to the prompt("how many squares") function
   });
 });
+
+/**
+ *
+ * @param {number} count
+ * @returns {void}
+ */
+const generateBoxes = (count) => {
+  const square = document.getElementById("squares");
+
+  if (square) {
+    square.innerHTML = "";
+  }
+  // optionally empty the children of square first
+  // then add count x count number of .box divs into square (hint: square.appendChild())
+  const boxSize = GRID_WIDTH / count - GRID_MARGIN * 2;
+  for (let i = 1; i <= count * count; i++) {
+    square?.appendChild(
+      createBox("box", {
+        height: boxSize,
+        width: boxSize,
+        margin: GRID_MARGIN,
+      })
+    );
+  }
+};
+
+/**
+ *
+ * @param {number} defaultSize
+ * @returns {number}
+ */
+function getCurrentGridSize(defaultSize) {
+  const newGridSize = parseInt(
+    document.getElementById("gridNum")?.value || defaultSize
+  );
+  return newGridSize;
+}
+
+function initializeEtchSketch() {
+  generateBoxes(getCurrentGridSize(6));
+  const gridContainer = document.getElementById("squares");
+  if (gridContainer) {
+    gridContainer.style.width = `${GRID_WIDTH}px`;
+    gridContainer?.addEventListener("mouseover", (e) => {
+      if (e.target?.classList.contains("box")) {
+        e.target.style.backgroundColor = boxColor();
+      }
+    });
+    gridContainer?.addEventListener("touchmove", (e) => {
+      const el = document.elementFromPoint(
+        e.changedTouches[0].clientX,
+        e.changedTouches[0].clientY
+      );
+      if (el?.classList.contains("box")) {
+        el.style.backgroundColor = boxColor();
+      }
+    });
+  }
+
+  document.getElementById("gridNum")?.addEventListener("change", (e) => {
+    generateBoxes(getCurrentGridSize(6));
+  });
+}
 
 /**
  * @param {string} className

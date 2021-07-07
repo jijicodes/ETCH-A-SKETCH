@@ -78,6 +78,10 @@ button {
   background-color: whitesmoke;
 }
 
+* {
+  touch-action: none;
+}
+
 #reset {
   margin: 15px;
   margin-left: 10px;
