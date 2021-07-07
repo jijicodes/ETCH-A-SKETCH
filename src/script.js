@@ -1,4 +1,4 @@
-const GRID_WIDTH = 400;
+const GRID_WIDTH = 700;
 const GRID_MARGIN = 2;
 window.addEventListener("DOMContentLoaded", (event) => {
   /**
