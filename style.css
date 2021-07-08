@@ -1,10 +1,14 @@
 :root {
   --reset-height: 90px;
   --grid-height: 95vw;
-  --heading-height: calc(95vh - var(--grid-height) - var(--reset-height));
+  --heading-height: calc(100% - var(--grid-height) - var(--reset-height));
+}
+html {
+  height: 100%;
 }
 
 body {
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -107,8 +111,11 @@ button {
   border-style: none;
   border-radius: 6px;
   margin-top: 10px;
-  height: var(--reset-height + 4px);
   padding: 0px 30px;
+}
+
+#resetRow {
+  height: var(--reset-height);
 }
 
 /* ===========================================================*/
