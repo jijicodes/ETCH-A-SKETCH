@@ -43,7 +43,6 @@ body p1 {
 #gridNum,
 #rainbowBtn,
 #darkBtn {
-  border-radius: 4px;
   width: 40%;
   border-style: none;
   border-radius: 6px;
@@ -103,7 +102,10 @@ button {
 }
 
 #reset {
-  border: none;
+  background-color: whitesmoke;
+  color: black;
+  border-style: none;
+  border-radius: 6px;
   margin-top: 10px;
   height: var(--reset-height + 4px);
   padding: 0px 30px;
