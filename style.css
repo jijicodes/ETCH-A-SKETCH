@@ -104,8 +104,9 @@ button {
 
 #reset {
   border: none;
-  margin-top: 20px;
-  height: var(--reset-height - 20px);
+  margin-top: 10px;
+  height: var(--reset-height + 4px);
+  padding: 0px 30px;
 }
 
 /* ===========================================================*/
