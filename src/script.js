@@ -1,8 +1,8 @@
 /**
  * @typedef {() => string} ColorGen
  */
-const GRID_WIDTH = 700;
-const GRID_MARGIN = 2;
+const GRID_WIDTH = 100;
+const GRID_MARGIN = 0.5;
 
 /**
  * @type {ColorGen}
@@ -87,7 +87,6 @@ function initializeEtchSketch() {
   generateBoxes(getCurrentGridSize(6));
   const gridContainer = document.getElementById("squares");
   if (gridContainer) {
-    gridContainer.style.width = `${GRID_WIDTH}px`;
     gridContainer?.addEventListener("mouseover", (e) => {
       if (e.target?.classList.contains("box")) {
         e.target.style.backgroundColor = boxColor();
@@ -117,9 +116,9 @@ function initializeEtchSketch() {
 
 function createBox(className, { width, height, margin = 0 }) {
   const item = document.createElement("div");
-  item.style.width = `${width}px`;
-  item.style.height = `${height}px`;
-  item.style.margin = `${margin}px`;
+  item.style.width = `${width}%`;
+  item.style.height = `${height}%`;
+  item.style.margin = `${margin}%`;
 
   item.classList.add(className);
 

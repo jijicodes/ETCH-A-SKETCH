@@ -2,19 +2,30 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 10px;
+  font-size: 50px;
   font-family: sans-serif;
   background-color: rgb(240, 212, 204);
   font-family: "ZCOOL KuaiLe", cursive;
 }
 
 body p {
-  font-size: 30px;
+  font-size: 80px;
 }
 body p1 {
-  font-size: 20px;
+  font-size: 60px;
   padding: 10px;
-  margin: 10px;
+  margin-bottom: 20px;
+}
+
+.settingBtn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#size {
+  font-size: 50px;
+  margin-top: 25px;
 }
 
 #gridNum,
@@ -22,11 +33,12 @@ body p1 {
 #darkBtn {
   margin-left: 10px;
   margin-right: 10px;
-  margin-bottom: 25px;
+  margin-bottom: 50px;
+  margin-top: 20px;
   border-radius: 4px;
   border: none;
-  font-size: 21px;
-  padding: 9px 18px;
+  font-size: 41px;
+  padding: 20px 40px;
 }
 
 #gridNum {
@@ -66,6 +78,8 @@ button {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: 95vw;
+  width: 95vw;
   /*
     you still have to style this div to make the .boxes appear in a grid
     this could be done via a few ways but it would be nice if you did it 
@@ -83,12 +97,18 @@ button {
 }
 
 #reset {
-  margin: 15px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 25px;
+  margin: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 30px;
   border-radius: 4px;
   border: none;
-  font-size: 21px;
-  padding: 9px 18px;
+  font-size: 41px;
+  padding: 20px 90px;
+}
+
+@media (min-width: 900px) {
+}
+
+@media (min-width: 1200px) {
 }
