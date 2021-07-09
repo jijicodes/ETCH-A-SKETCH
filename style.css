@@ -24,41 +24,48 @@ header {
   align-items: center;
 }
 
-body p {
-  font-size: 100%;
-}
-body p1 {
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
 .settingBtn {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
   align-items: center;
+  height: 100px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 95vw;
+  justify-content: space-evenly;
 }
 
-#size {
-  margin-top: 15px;
-  margin-right: 6px;
-}
-
-#gridNum,
-#rainbowBtn,
-#darkBtn {
-  width: 40%;
+#lower,
+#larger {
+  background-color: rgb(201, 107, 107);
+  color: black;
+  font-size: 50px;
+  height: 80%;
+  margin: 5px;
+  flex-grow: 1;
   border-style: none;
   border-radius: 6px;
-  padding-right: 25px;
 }
 
-#gridNum {
-  border-color: black;
+#btn1,
+#btn2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 100%;
+  margin-right: 10px;
+  margin-left: 10px;
+  flex-grow: 4;
+}
+
+.colorBtn {
+  border-style: none;
+  border-radius: 6px;
+  width: 100%;
+  height: 40px;
 }
 
 #rainbowBtn {
-  color: black;
   background-image: linear-gradient(
     to right,
     #e7484f,
@@ -79,7 +86,47 @@ body p1 {
 }
 #darkBtn {
   background-color: rgb(81, 82, 82);
-  color: white;
+  animation: slidebg 5s linear infinite;
+}
+
+#candyBtn {
+  background-image: linear-gradient(
+    135deg,
+    white,
+    white 16.65%,
+    red 16.65%,
+    red 33.3%,
+    white 33.3%,
+    white 49.95%,
+    red 49.95%,
+    red 66.6%,
+    white 66.6%,
+    white 83.25%,
+    red 83.25%,
+    red 100%,
+    white 100%
+  );
+  animation: slidebg 5s linear infinite;
+}
+
+#pastelBtn {
+  background-image: linear-gradient(
+    to left,
+    rgb(192, 242, 242),
+    rgb(192, 242, 242) 16.65%,
+    rgb(214, 241, 138) 16.65%,
+    rgb(214, 241, 138) 33.3%,
+    hsl(300, 76%, 87%) 33.3%,
+    hsl(300, 76%, 87%) 49.95%,
+    rgb(167, 255, 196) 49.95%,
+    rgb(167, 255, 196) 66.6%,
+    rgb(252, 167, 167) 66.6%,
+    rgb(252, 167, 167) 83.25%,
+    rgb(169, 213, 255) 83.25%,
+    rgb(169, 213, 255) 100%,
+    rgb(155, 254, 221) 100%
+  );
+  animation: slidebg 5s linear infinite;
 }
 
 button {
@@ -106,12 +153,10 @@ button {
 }
 
 #reset {
-  background-color: whitesmoke;
+  background-color: rgb(201, 107, 107);
   color: black;
-  border-style: none;
-  border-radius: 6px;
   margin-top: 10px;
-  padding: 0px 30px;
+  padding: 0px 70px;
 }
 
 #resetRow {

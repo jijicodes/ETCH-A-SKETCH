@@ -16,24 +16,23 @@
       <p id="title">Etch-a-Sketch</p>
       <p1 id="instruction">Sketch your dream</p1>
       <section class="settingBtn">
-        <p id="size">size:</p>
-        <input
-          id="gridNum"
-          type="number"
-          name="gridNum"
-          min="2"
-          max="20"
-          value="20"
-        />
-        <button id="rainbowBtn" type="button">Rainbow</button>
-        <button id="darkBtn" type="button">Dark</button>
+        <p id="lower">&lt;</p>
+        <div id="btn1">
+          <button class="colorBtn" id="rainbowBtn" type="button"></button>
+          <button class="colorBtn" id="darkBtn" type="button"></button>
+        </div>
+        <div id="btn2">
+          <button class="colorBtn" id="candyBtn" type="button"></button>
+          <button class="colorBtn" id="pastelBtn" type="button"></button>
+        </div>
+        <p id="larger">&gt;</p>
       </section>
     </header>
     <div id="squares">
       <!-- render .box elements into here!  -->
     </div>
     <div id="resetRow">
-      <button id="reset">Reset</button>
+      <button class="colorBtn" id="reset">Reset</button>
     </div>
   </body>
 </html>
