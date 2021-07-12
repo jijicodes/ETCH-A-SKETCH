@@ -5,19 +5,46 @@ const GRID_WIDTH = 100;
 const GRID_MARGIN = 0.5;
 
 /**
- * @type {ColorGen}
+ * @type {{boxColor: ColorGen, gridCount: number}}
  */
-let boxColor = () => "pink";
+let state = {
+  boxColor: () => "pink",
+  gridCount: 5,
+};
 
 window.addEventListener("DOMContentLoaded", (event) => {
   initializeEtchSketch();
 
+  document.getElementById("lower")?.addEventListener("click", (e) => {
+    state.gridCount > 1 ? (state.gridCount -= 1) : 2;
+    generateBoxes(state.gridCount);
+  });
+
+  document.getElementById("larger")?.addEventListener("click", (e) => {
+    state.gridCount += 1;
+    generateBoxes(state.gridCount);
+  });
+
   document.getElementById("rainbowBtn")?.addEventListener("click", (e) => {
-    boxColor = rainbowColor;
+    state.boxColor = rainbowColor;
+  });
+
+  document.getElementById("candyBtn")?.addEventListener("click", (e) => {
+    state.boxColor = (() => {
+      let isRed = true;
+      return () => {
+        isRed = isRed ? false : true;
+        return isRed ? `rgb(255,255,255)` : `rgb(255,0,0)`;
+      };
+    })();
+  });
+
+  document.getElementById("pastelBtn")?.addEventListener("click", (e) => {
+    state.boxColor = () => `hsl(${Math.random() * 360}, 95%, 85%)`;
   });
 
   document.getElementById("darkBtn")?.addEventListener("click", (e) => {
-    boxColor = (() => {
+    state.boxColor = (() => {
       let alpha = 0.1;
       return () => {
         alpha += (1 - alpha) / 50;
@@ -38,8 +65,8 @@ window.addEventListener("DOMContentLoaded", (event) => {
   }
 
   document.getElementById("reset")?.addEventListener("click", (e) => {
-    generateBoxes(getCurrentGridSize(5));
-    boxColor = () => "pink";
+    generateBoxes(state.gridCount);
+    state.boxColor = () => "pink";
 
     // empty the #squares div of children
     // call generate boxes with the result of a call to the prompt("how many squares") function
@@ -71,40 +98,37 @@ const generateBoxes = (count) => {
   }
 };
 
-/**
- *
- * @param {number} defaultSize
- * @returns {number}
- */
-function getCurrentGridSize(defaultSize) {
-  const newGridSize = parseInt(
-    document.getElementById("gridNum")?.value || defaultSize
-  );
-  return newGridSize;
-}
-
 function initializeEtchSketch() {
-  generateBoxes(getCurrentGridSize(6));
+  generateBoxes(state.gridCount);
   const gridContainer = document.getElementById("squares");
   if (gridContainer) {
     gridContainer?.addEventListener("mouseover", (e) => {
-      if (e.target?.classList.contains("box")) {
-        e.target.style.backgroundColor = boxColor();
+      /**
+       * @type {HTMLElement | null}
+       */
+      // @ts-ignore
+      const targetEl = e.target;
+      if (targetEl?.classList.contains("box")) {
+        targetEl.style.backgroundColor = state.boxColor();
       }
     });
     gridContainer?.addEventListener("touchmove", (e) => {
+      /**
+       * @type {HTMLElement | null}
+       */
+      // @ts-ignore
       const el = document.elementFromPoint(
         e.changedTouches[0].clientX,
         e.changedTouches[0].clientY
       );
       if (el?.classList.contains("box")) {
-        el.style.backgroundColor = boxColor();
+        el.style.backgroundColor = state.boxColor();
       }
     });
   }
 
   document.getElementById("gridNum")?.addEventListener("change", (e) => {
-    generateBoxes(getCurrentGridSize(6));
+    generateBoxes(state.gridCount);
   });
 }
 
