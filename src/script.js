@@ -16,7 +16,7 @@ window.addEventListener("DOMContentLoaded", (event) => {
   initializeEtchSketch();
 
   document.getElementById("lower")?.addEventListener("click", (e) => {
-    state.gridCount > 1 ? (state.gridCount -= 1) : 2;
+    state.gridCount > 1 && (state.gridCount -= 1);
     generateBoxes(state.gridCount);
   });
 
