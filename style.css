@@ -1,9 +1,7 @@
 :root {
   --reset-height: 90px;
   --grid-height: 95vw;
-  --heading-height: calc(
-    -webkit-fill-available - var(--grid-height) - var(--reset-height)
-  );
+  --heading-height: calc(100% - var(--grid-height) - var(--reset-height));
 }
 html {
   height: 100%;
