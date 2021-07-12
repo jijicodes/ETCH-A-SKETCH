@@ -33,7 +33,7 @@ header {
 .settingBtn {
   display: flex;
   align-items: center;
-  height: 100px;
+  height: 80px;
   margin-bottom: 10px;
   margin-top: 10px;
   width: 95vw;
@@ -45,6 +45,7 @@ header {
   background-color: rgb(201, 107, 107);
   color: black;
   font-size: 50px;
+  text-align: center;
   height: 100%;
   flex-grow: 1;
   border-style: none;
