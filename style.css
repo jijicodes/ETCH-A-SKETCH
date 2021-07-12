@@ -162,8 +162,18 @@ button {
   height: var(--reset-height);
 }
 
-@media only screen and (min-height: 667px) and (min-width: 375px) and (-webkit-min-device-pixel-ratio: 2) {
+@media only screen and (height: 667px) and (width: 375px) and (-webkit-device-pixel-ratio: 2) and (resolution: 192dpi) {
+  :root {
+    --heading-height: calc(
+      100% - var(--grid-height) - var(--reset-height) - 100px
+    );
+  }
+
+  header {
+    height: var(--heading-height - 40px);
+  }
+
   body {
-    background-color: darkslategrey;
+    background-color: lavender;
   }
 }
