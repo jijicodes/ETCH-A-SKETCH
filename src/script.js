@@ -120,19 +120,30 @@ function initializeEtchSketch() {
         targetEl.style.backgroundColor = state.boxColor();
       }
     });
-    gridContainer?.addEventListener("touchmove", (e) => {
-      /**
-       * @type {HTMLElement | null}
-       */
-      // @ts-ignore
-      const el = document.elementFromPoint(
-        e.changedTouches[0].clientX,
-        e.changedTouches[0].clientY
-      );
-      if (el?.classList.contains("box")) {
-        el.style.backgroundColor = state.boxColor();
-      }
-    });
+    gridContainer?.addEventListener(
+      "touchmove",
+      (() => {
+        /**
+         * @type {HTMLElement | null | undefined}
+         */
+        let lastEl;
+        // @ts-ignore
+        return (e) => {
+          /**
+           * @type {HTMLElement | null}
+           */
+          // @ts-ignore
+          const el = document.elementFromPoint(
+            e.changedTouches[0].clientX,
+            e.changedTouches[0].clientY
+          );
+          if (lastEl !== el && el?.classList.contains("box")) {
+            lastEl = el;
+            el.style.backgroundColor = state.boxColor();
+          }
+        };
+      })()
+    );
   }
 
   document.getElementById("gridNum")?.addEventListener("change", (e) => {

@@ -11,6 +11,11 @@ html {
 }
 #title {
   margin: 0;
+  line-height: 1.5em;
+}
+
+#instruction {
+  line-height: 1em;
 }
 
 body {
@@ -33,7 +38,7 @@ header {
 .settingBtn {
   display: flex;
   align-items: center;
-  height: 80px;
+  height: calc(var(--heading-height) - 1.5em - 1em);
   margin-bottom: 10px;
   margin-top: 10px;
   width: 95vw;
@@ -51,6 +56,7 @@ header {
   border-style: none;
   border-radius: 6px;
   padding-top: 10px;
+  margin: 0;
 }
 
 #btn1,
@@ -168,18 +174,56 @@ button {
   height: var(--reset-height);
 }
 
-/* @media only screen and (height: 667px) and (width: 375px) and (-webkit-device-pixel-ratio: 2) and (resolution: 192dpi) {
+/* landscape mode */
+@media screen and (min-width: 600px) {
   :root {
-    --heading-height: calc(
-      (--vh * 100) - var(--grid-height) - var(--reset-height) - 100px
-    );
-  }
-
-  header {
-    height: var(--heading-height) - 40px);
+    /* --reset-height: 45px; */
+    --grid-height: 100vh;
+    /* --heading-height: calc(
+      100 * var(--vh) - var(--grid-height) - var(--reset-height)
+    ); */
   }
 
   body {
     background-color: lavender;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    /* width: 100%;
+    max-width: 100%;
+    height: 75vh; */
+    height: 100vh;
+    justify-content: center;
   }
-} */
+
+  header {
+    display: flex;
+    flex-direction: column;
+    order: 1;
+    max-height: initial;
+    height: auto;
+    justify-content: space-between;
+  }
+
+  #squares {
+    order: 3;
+  }
+
+  .settingBtn {
+    width: 100%;
+    height: auto;
+  }
+
+  #resetRow {
+    order: 2;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  body {
+    background-color: gray;
+    max-width: 1000px;
+    max-height: 1000px;
+    align-items: center;
+  }
+}
